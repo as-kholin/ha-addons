@@ -12,9 +12,10 @@ Follow these steps to get the add-on installed on your system:
 
 1. In the configuration section, set a username and password.
    You can specify any username and password; these are not related in any way to the login credentials you use to log in to Home Assistant or to log in to the computer with which you will use Samba share.
-2. Save the configuration.
-3. Start the add-on.
-4. Check the add-on log output to see the result.
+2. Review the enabled shares.  Disable any you do not plan to use (they can be re-enabled later)
+3. Save the configuration.
+4. Start the add-on.
+5. Check the add-on log output to see the result.
 
 ## Connection
 
@@ -40,6 +41,14 @@ Add-on configuration:
 workgroup: WORKGROUP
 username: homeassistant
 password: YOUR_PASSWORD
+enabled_shares:
+  - addons
+  - addon_configs
+  - backup
+  - config
+  - media
+  - share
+  - ssl
 allow_hosts:
   - 10.0.0.0/8
   - 172.16.0.0/12
@@ -52,6 +61,7 @@ veto_files:
   - ".DS_Store"
   - Thumbs.db
 compatibility_mode: false
+debug: false
 ```
 
 ### Option: `workgroup` (required)
@@ -65,6 +75,10 @@ The username you would like to use to authenticate with the Samba server.
 ### Option: `password` (required)
 
 The password that goes with the username configured for authentication.
+
+### Option: `enabled_shares` (required)
+
+List of Samba shares able to be accessed.
 
 ### Option: `allow_hosts` (required)
 
@@ -84,6 +98,13 @@ handle the newer protocols, however, it lowers security. Only use this
 when you absolutely need it and understand the possible consequences.
 
 Defaults to `false`.
+
+### Option: `debug` (optional)
+
+Outputs the resulting Samba config in the log. Generally, unless you
+know what you would be wanting to do with this information, not necessary.
+
+Optional config.  If not defined, then it will default to `false`.
 
 ## Support
 
